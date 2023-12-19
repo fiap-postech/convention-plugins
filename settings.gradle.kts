@@ -13,5 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "tech-challenge-convention-plugins"
+rootProject.name = "gradle-plugins"
 include("convention-plugin")
