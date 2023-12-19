@@ -15,7 +15,7 @@ class MicroservicePlugin: Plugin<Project> {
             }
 
             extensions.configure<PublishingExtension> {
-                configurePublishing(this)
+                configurePublishing(this, target)
             }
         }
     }

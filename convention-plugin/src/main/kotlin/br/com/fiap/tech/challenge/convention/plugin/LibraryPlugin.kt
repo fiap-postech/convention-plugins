@@ -21,7 +21,7 @@ class LibraryPlugin : Plugin<Project> {
             }
 
             extensions.configure<PublishingExtension> {
-                configurePublishing(this)
+                configurePublishing(this, target)
             }
 
             extensions.configure<JavaPluginExtension> {

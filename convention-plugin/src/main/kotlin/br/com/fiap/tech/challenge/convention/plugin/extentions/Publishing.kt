@@ -6,12 +6,12 @@ import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.kotlin.dsl.get
 import org.gradle.kotlin.dsl.register
 
-internal fun Project.configurePublishing(publishingExtension: PublishingExtension) {
+internal fun Project.configurePublishing(publishingExtension: PublishingExtension, project: Project) {
     publishingExtension.apply {
         repositories {
             maven {
                 name = "GitHubPackages"
-                url = uri("https://maven.pkg.github.com/fiap-postech/${name}")
+                url = uri("https://maven.pkg.github.com/fiap-postech/${project.name}")
                 credentials {
                     username = findProperty("gpr.user") as String? ?: System.getenv("GITHUB_ACTOR")
                     password = findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
