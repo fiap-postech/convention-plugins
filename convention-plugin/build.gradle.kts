@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 group = "tech.challenge"
-version = "1.0.0"
+version = "1.0.1"
 
 plugins {
     `kotlin-dsl`
@@ -10,10 +10,14 @@ plugins {
 
 }
 
+repositories {
+
+}
+
 dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    compileOnly(libs.kotlin.gradlePlugin)
+    compileOnly(sharedLibs.kotlin.gradlePlugin)
 }
 
 gradlePlugin {
@@ -43,4 +47,17 @@ tasks.withType<KotlinCompile>().configureEach {
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/fiap-postech/gradle-plugins")
+            credentials {
+                username = findProperty("gprUser") as String? ?: System.getenv("GITHUB_ACTOR")
+                password = findProperty("gprKey") as String? ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
 }

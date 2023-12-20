@@ -5,6 +5,7 @@ import br.com.fiap.tech.challenge.convention.plugin.extentions.configurePublishi
 import br.com.fiap.tech.challenge.convention.plugin.extentions.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.repositories.PasswordCredentials
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.kotlin.dsl.configure
@@ -32,14 +33,23 @@ class LibraryPlugin : Plugin<Project> {
                 useJUnitPlatform()
             }
 
+
             repositories {
                 mavenLocal()
                 mavenCentral()
                 maven {
                     url = uri("https://maven.pkg.github.com/fiap-postech/domain-common")
                     credentials {
-                        username = findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
-                        password = findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+                        username = findProperty(GRADLE_PROPERTIES_USERNAME) as String? ?: System.getenv(ENV_GITHUB_USERNAME)
+                        password = findProperty(GRADLE_PROPERTIES_PASSWORD) as String? ?: System.getenv(ENV_GITHUB_PASSWORD)
+                    }
+                }
+
+                maven {
+                    url = uri("https://maven.pkg.github.com/fiap-postech/gradle-version-catalog")
+                    credentials {
+                        username = findProperty(GRADLE_PROPERTIES_USERNAME) as String? ?: System.getenv(ENV_GITHUB_USERNAME)
+                        password = findProperty(GRADLE_PROPERTIES_PASSWORD) as String? ?: System.getenv(ENV_GITHUB_PASSWORD)
                     }
                 }
             }
