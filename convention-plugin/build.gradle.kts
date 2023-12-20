@@ -1,17 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 group = "tech.challenge"
-version = "1.0.1"
+version = "1.0.2"
 
 plugins {
     `kotlin-dsl`
     `maven-publish`
-    id("com.gradle.plugin-publish") version("0.16.0")
-
-}
-
-repositories {
-
+    `java-gradle-plugin`
 }
 
 dependencies {
@@ -21,13 +16,22 @@ dependencies {
 }
 
 gradlePlugin {
+    website = "https://github.com/fiap-postech/gradle-plugins"
+    vcsUrl = "https://github.com/fiap-postech/gradle-plugins"
+
     plugins {
         register("libraryPlugin") {
             id = "tech.challenge.library"
+            displayName = "Tech Challenge Library Plugin"
+            description = "Plugin to convention Java Library Structure"
+            tags = listOf("java", "library", "convention")
             implementationClass = "br.com.fiap.tech.challenge.convention.plugin.LibraryPlugin"
         }
         register("microservicePlugin") {
             id = "tech.challenge.microservice"
+            displayName = "Tech Challenge Microservice Plugin"
+            description = "Plugin to convention Java Microservice Structure"
+            tags = listOf("java", "microservice", "convention")
             implementationClass = "br.com.fiap.tech.challenge.convention.plugin.MicroservicePlugin"
         }
     }
