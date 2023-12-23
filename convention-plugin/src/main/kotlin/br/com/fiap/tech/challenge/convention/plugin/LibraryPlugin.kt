@@ -32,31 +32,43 @@ class LibraryPlugin : Plugin<Project> {
                 useJUnitPlatform()
             }
 
+            var githubUsername = System.getProperty(GRADLE_PROPERTIES_USERNAME)
+
+            if (githubUsername.isNullOrBlank() || githubUsername.isEmpty()) {
+                githubUsername = System.getenv(ENV_GITHUB_USERNAME)
+            }
+
+            var githubPassword = System.getProperty(GRADLE_PROPERTIES_PASSWORD)
+
+            if (githubPassword.isNullOrBlank() || githubPassword.isEmpty()){
+                githubPassword = System.getenv(ENV_GITHUB_PASSWORD);
+            }
 
             repositories {
                 mavenLocal()
                 mavenCentral()
+
                 maven {
                     url = uri("https://maven.pkg.github.com/fiap-postech/domain-common")
                     credentials {
-                        username = findProperty(GRADLE_PROPERTIES_USERNAME) as String? ?: System.getenv(ENV_GITHUB_USERNAME)
-                        password = findProperty(GRADLE_PROPERTIES_PASSWORD) as String? ?: System.getenv(ENV_GITHUB_PASSWORD)
+                        username = githubUsername
+                        password = githubPassword
                     }
                 }
 
                 maven {
                     url = uri("https://maven.pkg.github.com/fiap-postech/rest-common")
                     credentials {
-                        username = findProperty(GRADLE_PROPERTIES_USERNAME) as String? ?: System.getenv(ENV_GITHUB_USERNAME)
-                        password = findProperty(GRADLE_PROPERTIES_PASSWORD) as String? ?: System.getenv(ENV_GITHUB_PASSWORD)
+                        username = githubUsername
+                        password = githubPassword
                     }
                 }
 
                 maven {
                     url = uri("https://maven.pkg.github.com/fiap-postech/gradle-version-catalog")
                     credentials {
-                        username = findProperty(GRADLE_PROPERTIES_USERNAME) as String? ?: System.getenv(ENV_GITHUB_USERNAME)
-                        password = findProperty(GRADLE_PROPERTIES_PASSWORD) as String? ?: System.getenv(ENV_GITHUB_PASSWORD)
+                        username = githubUsername
+                        password = githubPassword
                     }
                 }
             }
