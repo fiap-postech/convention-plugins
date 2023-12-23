@@ -12,7 +12,7 @@ plugins {
 dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    compileOnly(sharedLibs.kotlin.gradlePlugin)
+    compileOnly("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0")
 }
 
 gradlePlugin {
