@@ -24,7 +24,7 @@ dependencyResolutionManagement {
 
     versionCatalogs {
         create("sharedLibs") {
-            from("br.com.fiap.tech.challenge:gradle-version-catalog:1.0.1")
+            from("br.com.fiap.tech.challenge:gradle-version-catalog:1.0.2")
         }
     }
 }
