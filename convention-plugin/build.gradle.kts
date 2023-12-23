@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 group = "tech.challenge"
-version = "1.0.2"
+version = "1.0.3"
 
 plugins {
     `kotlin-dsl`
